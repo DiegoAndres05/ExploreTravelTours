@@ -41,7 +41,7 @@ body {
     background: var(--blur-bg);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
-    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
 }
 
 .navbar-content {
@@ -66,6 +66,8 @@ body {
 
 .nav-center {
     display: flex;
+    justify-content: center;
+    align-items: center;
     gap: 40px;
 }
 
@@ -76,7 +78,7 @@ body {
     font-size: 16px;
     transition: var(--transition);
     position: relative;
-    text-shadow: 0 2px 4px rgba(0,0,0,0.4);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
 }
 
 .main-header.scrolled .nav-link {
@@ -140,7 +142,7 @@ body {
     font-size: 28px;
     color: var(--text-white);
     cursor: pointer;
-    text-shadow: 0 2px 4px rgba(0,0,0,0.4);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
 }
 
 .main-header.scrolled .menu-btn {
@@ -162,8 +164,11 @@ body {
 /* Keep the shadow subtle enough to let image pop, but dark enough to read white text */
 .hero-overlay {
     position: absolute;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.1) 40%, rgba(0,0,0,0.5));
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.1) 40%, rgba(0, 0, 0, 0.5));
     z-index: 1;
 }
 
@@ -191,7 +196,7 @@ body {
     font-family: var(--font-serif);
     font-size: 8vw;
     color: var(--text-white);
-    text-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    text-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
     line-height: 1;
     text-align: center;
     margin-bottom: 24px;
@@ -212,7 +217,7 @@ body {
     font-size: 1.25rem;
     line-height: 1.6;
     font-weight: 400;
-    text-shadow: 0 2px 10px rgba(0,0,0,0.4);
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
     margin-bottom: 30px;
 }
 
@@ -232,7 +237,7 @@ body {
 .lets-go-btn:hover {
     background-color: #000;
     transform: scale(1.05);
-    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
 }
 
 .hero-social {
@@ -247,7 +252,7 @@ body {
     color: rgba(255, 255, 255, 0.9);
     font-size: 14px;
     font-weight: 400;
-    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .ig-btn {
@@ -322,16 +327,16 @@ body {
     background: #fff;
     border-radius: 20px;
     overflow: hidden;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
     transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.8s, transform 0.8s;
     display: flex;
     flex-direction: column;
-    border: 1px solid rgba(0,0,0,0.02);
+    border: 1px solid rgba(0, 0, 0, 0.02);
 }
 
 .service-card:hover {
     transform: translateY(-8px) !important;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
 }
 
 .card-image-wrapper {
@@ -441,7 +446,7 @@ body {
 }
 
 .testimonial-card:hover {
-    box-shadow: 0 15px 35px rgba(0,0,0,0.05);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.05);
     background: #fff;
     transform: translateY(-5px) !important;
 }
@@ -511,11 +516,12 @@ body {
         grid-column: span 1;
         flex-direction: column;
     }
-    
-    .wide-card .card-image-wrapper, .wide-card .card-content {
+
+    .wide-card .card-image-wrapper,
+    .wide-card .card-content {
         width: 100%;
     }
-    
+
     .services-grid {
         grid-template-columns: 1fr;
     }
@@ -526,21 +532,29 @@ body {
 }
 
 @media (max-width: 768px) {
-    .nav-center, .wa-text {
+
+    .nav-center,
+    .nav-right {
         display: none;
     }
-    
-    .wa-contact-btn {
-        padding: 10px;
-        border-radius: 50%;
+
+    .navbar-content {
+        position: relative;
+        justify-content: center;
     }
 
-    .wa-contact-btn i {
-        margin: 0;
+    .nav-left {
+        width: 100%;
+        justify-content: center;
     }
 
     .menu-btn {
         display: block;
+        position: absolute;
+        left: 5%;
+        top: 50%;
+        transform: translateY(-50%);
+        margin: 0;
     }
 
     .hero-title {
