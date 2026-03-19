@@ -10,6 +10,11 @@
     --font-serif: 'Playfair Display', serif;
     --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     --whatsapp-green: #25D366;
+    
+    /* Branding Colors */
+    --brand-blue: #1e3a8a;    /* Professional deep blue */
+    --brand-orange: #ea580c;  /* Corporate vibrant orange */
+    --brand-orange-light: #fff7ed;
 }
 
 * {
@@ -193,7 +198,7 @@ body {
 }
 
 .hero-title {
-    font-family: var(--font-serif);
+    font-family: inherit;
     font-size: 8vw;
     color: var(--text-white);
     text-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
@@ -214,7 +219,7 @@ body {
 
 .hero-subtitle {
     color: var(--text-white);
-    font-size: 1.25rem;
+    font-size: 1.5rem;
     line-height: 1.6;
     font-weight: 400;
     text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
@@ -423,9 +428,76 @@ body {
     font-size: 30px;
 }
 
+/* DESTINATIONS SECTION */
+.destinations-section {
+    background-color: #f8fafc;
+    padding: 100px 5%;
+}
+
+.destinations-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.destination-item {
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 40px 30px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.8s, transform 0.8s;
+    border: 1px solid rgba(0, 0, 0, 0.03);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    border-top: 4px solid var(--brand-blue);
+}
+
+.destination-item:hover {
+    transform: translateY(-8px) !important;
+    box-shadow: 0 15px 35px rgba(30, 58, 138, 0.1);
+    border-top-color: var(--brand-orange);
+}
+
+.destination-item i {
+    font-size: 35px;
+    color: var(--brand-orange);
+    background: var(--brand-orange-light);
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    margin-bottom: 10px;
+    transition: var(--transition);
+}
+
+.destination-item:hover i {
+    background: var(--brand-orange);
+    color: #fff;
+    box-shadow: 0 10px 20px rgba(234, 88, 12, 0.2);
+}
+
+.destination-item h3 {
+    font-size: 20px;
+    color: var(--brand-blue);
+    font-family: var(--font-sans);
+    font-weight: 600;
+}
+
+.destination-item p {
+    color: #64748b;
+    font-size: 15px;
+    line-height: 1.6;
+}
+
 /* TESTIMONIALS SECTION */
 .testimonials-section {
-    background-color: #ffffff;
+    background-color: #f8fafc;
     padding: 100px 5%;
 }
 
@@ -438,7 +510,7 @@ body {
 }
 
 .testimonial-card {
-    background: #f8fafc;
+    background: #ffffff;
     padding: 40px 30px;
     border-radius: 20px;
     text-align: center;
@@ -526,7 +598,8 @@ body {
         grid-template-columns: 1fr;
     }
 
-    .testimonials-grid {
+    .testimonials-grid,
+    .destinations-grid {
         grid-template-columns: repeat(2, 1fr);
     }
 }
@@ -569,7 +642,8 @@ body {
         font-size: 36px;
     }
 
-    .testimonials-grid {
+    .testimonials-grid,
+    .destinations-grid {
         grid-template-columns: 1fr;
     }
 
