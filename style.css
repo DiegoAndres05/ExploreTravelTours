@@ -56,6 +56,7 @@ body {
     padding: 15px 5%;
     max-width: 1400px;
     margin: 0 auto;
+    position: relative;
 }
 
 .nav-left {
@@ -74,6 +75,9 @@ body {
     justify-content: center;
     align-items: center;
     gap: 40px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 .nav-link {
@@ -160,7 +164,7 @@ body {
     position: relative;
     height: 100vh;
     width: 100%;
-    background: url('assets/hero.png') center/cover no-repeat;
+    background: url('assets/fondoexploretours.png') center/cover no-repeat;
     display: flex;
     flex-direction: column;
     overflow: hidden;
@@ -192,29 +196,43 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     position: relative;
     z-index: 3;
+    width: 100%;
+    padding-left: 5%;
+}
+
+.hero-brand {
+    display: block;
+    margin-bottom: 18px;
+
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+
+    color:  #f8cf00;
 }
 
 .hero-title {
     font-family: inherit;
-    font-size: 8vw;
+    font-size: 4.5vw;
     color: var(--text-white);
     text-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
     line-height: 1;
-    text-align: center;
+    text-align: left;
     margin-bottom: 24px;
     letter-spacing: -0.02em;
 }
 
 .hero-subtitle-box {
-    text-align: center;
-    max-width: 600px;
+    text-align: left;
+    max-width: 520px;
     margin-top: 20px;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
 }
 
 .hero-subtitle {
@@ -249,7 +267,7 @@ body {
     margin-top: 10px;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     gap: 12px;
 }
 
@@ -611,6 +629,10 @@ body {
         display: none;
     }
 
+    .nav-center {
+        transform: none;
+    }
+
     .navbar-content {
         position: relative;
         justify-content: center;
@@ -634,8 +656,13 @@ body {
         font-size: 12vw;
     }
 
+    .hero-content {
+        padding-left: 6%;
+        padding-right: 6%;
+    }
+
     .hero-subtitle-box {
-        padding: 0 20px;
+        max-width: 100%;
     }
 
     .section-header h2 {
