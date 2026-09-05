@@ -25,7 +25,6 @@
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <!-- Updated Fonts: Added Montserrat per user request for matching the logo typography -->
     <link
         href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap"
         rel="stylesheet">
@@ -57,19 +56,20 @@
     <header class="main-header" id="navbar">
         <nav class="navbar-content">
             <div class="nav-left">
-                <button class="menu-btn"><i class="uil uil-bars"></i></button>
+                <button class="menu-btn" type="button" aria-label="Abrir menú"><i class="uil uil-bars"></i></button>
                 <img src="logo.jpeg" alt="Explore Tours Logo" class="logo">
             </div>
 
             <div class="nav-center">
                 <a href="#about" class="nav-link">Inicio</a>
-                <a href="#services" class="nav-link">Servicios</a>
+                <a href="#experiences" class="nav-link">Experiencias</a>
                 <a href="#testimonials" class="nav-link">Testimonios</a>
+                <a href="#faq" class="nav-link">Preguntas frecuentes</a>
             </div>
 
             <div class="nav-right">
                 <a href="https://wa.me/573042143149?text=Hola,%20me%20encantaría%20hacer%20una%20reserva%20o%20conocer%20más%20sobre%20Explore%20Tours"
-                    target="_blank" class="wa-contact-btn">
+                    target="_blank" rel="noopener noreferrer" class="wa-contact-btn">
                     <i class="uil uil-whatsapp"></i> <span class="wa-text">Contactar Ya</span>
                 </a>
             </div>
@@ -78,166 +78,342 @@
 
     <!-- Floating WhatsApp CTA -->
     <a href="https://wa.me/573042143149?text=Hola,%20quisiera%20asesoría%20sobre%20los%20viajes." target="_blank"
-        class="floating-wa" title="Chatea con nosotros">
+        rel="noopener noreferrer" class="floating-wa" title="Chatea con nosotros">
         <i class="uil uil-whatsapp"></i>
     </a>
+
+    <datalist id="place-suggestions">
+        <option value="Cartagena"></option>
+        <option value="Barranquilla"></option>
+        <option value="Santa Marta"></option>
+        <option value="Aeropuerto"></option>
+        <option value="Playa Blanca / Barú"></option>
+        <option value="Volcán del Totumo"></option>
+        <option value="Sincelejo"></option>
+        <option value="Montería"></option>
+    </datalist>
 
     <!-- Hero Section -->
     <section class="hero-section" id="about">
         <div class="hero-overlay"></div>
-        <div class="hero-content">
-            <h1 class="hero-title">Explore Travel Tours</h1>
+        <div class="hero-layout">
+            <div class="hero-content">
+                <h1 class="hero-title">Explore Travel Tours</h1>
 
-            <div class="hero-subtitle-box">
-                <p class="hero-subtitle">Descubre las incomparables maravillas del Caribe colombiano. ¡Disfruta de
-                    aventuras inolvidables y momentos mágicos en nuestros destinos top!</p>
-                <a href="#services" class="lets-go-btn">Ver Servicios</a>
+                <div class="hero-subtitle-box">
+                    <p class="hero-subtitle">Descubre las incomparables maravillas del Caribe colombiano. ¡Disfruta de
+                        aventuras inolvidables y momentos mágicos en nuestros destinos top!</p>
+                    <a href="#experiences" class="lets-go-btn">Ver Servicios</a>
 
-                <div class="hero-social">
-                    <p>También puedes seguirnos en nuestras redes sociales</p>
-                    <a href="https://www.instagram.com/exploretraveltoursco" target="_blank" class="ig-btn"><i
-                            class="uil uil-instagram"></i>
-                        Instagram</a>
+                    <div class="hero-social">
+                        <p>También puedes seguirnos en nuestras redes sociales</p>
+                        <a href="https://www.instagram.com/exploretraveltoursco" target="_blank"
+                            rel="noopener noreferrer" class="ig-btn"><i class="uil uil-instagram"></i> Instagram</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hero-footer">
+                <div class="hero-search" id="hero-search">
+                    <div id="quote-summary" class="quote-summary" hidden>
+                        <h2>Resumen de cotización</h2>
+                        <dl class="quote-lines" id="quote-lines"></dl>
+                        <a href="#" target="_blank" rel="noopener noreferrer" class="quote-wa-btn" id="quote-wa-btn">
+                            <i class="uil uil-whatsapp"></i> Continuar por WhatsApp
+                        </a>
+                        <div class="quote-related" id="quote-related" hidden></div>
+                    </div>
+
+                    <div class="search-tabs" role="tablist" aria-label="Tipo de búsqueda">
+                        <button type="button" class="search-tab is-active" role="tab" id="tab-transporte"
+                            aria-selected="true" aria-controls="panel-transporte" data-mode="transporte">Transporte</button>
+                        <button type="button" class="search-tab" role="tab" id="tab-por-horas" aria-selected="false"
+                            aria-controls="panel-por-horas" data-mode="por-horas">Por horas</button>
+                    </div>
+
+                    <form id="search-form-transporte" class="search-panel is-active" role="tabpanel"
+                        aria-labelledby="tab-transporte" data-mode="transporte">
+                        <div class="trip-type-row" role="group" aria-label="Tipo de viaje">
+                            <label class="trip-option">
+                                <input type="radio" name="trip-type" value="solo-ida" checked>
+                                <span>Solo ida</span>
+                            </label>
+                            <label class="trip-option">
+                                <input type="radio" name="trip-type" value="ida-vuelta">
+                                <span>Ida y vuelta</span>
+                            </label>
+                        </div>
+                        <div class="search-fields">
+                            <label class="field field-return" hidden>
+                                <input type="date" name="return-date">
+                                <span>Fecha de regreso</span>
+                            </label>
+                            <label class="field">
+                                <input type="text" name="origin" list="place-suggestions" autocomplete="off" required
+                                    placeholder=" ">
+                                <span>Origen</span>
+                            </label>
+                            <label class="field">
+                                <input type="text" name="destination" list="place-suggestions" autocomplete="off" required
+                                    placeholder=" ">
+                                <span>Destino</span>
+                            </label>
+                            <label class="field">
+                                <input type="date" name="depart-date" required>
+                                <span>Fecha de ida</span>
+                            </label>
+                            <label class="field">
+                                <input type="time" name="depart-time" required>
+                                <span>Hora</span>
+                            </label>
+                            <label class="field">
+                                <input type="number" name="passengers" min="1" value="1" required>
+                                <span>Pasajeros</span>
+                            </label>
+                        </div>
+                        <p class="search-errors" id="errors-transporte" hidden></p>
+                        <div class="search-same-place" id="same-place-prompt" hidden>
+                            <p>Para un traslado necesitas origen y destino distintos.</p>
+                            <button type="button" class="secondary-btn" id="switch-to-hourly">Cambiar a Por horas</button>
+                        </div>
+                        <button type="submit" class="search-submit">Buscar / Continuar</button>
+                    </form>
+
+                    <form id="search-form-hourly" class="search-panel" role="tabpanel" aria-labelledby="tab-por-horas"
+                        data-mode="por-horas" hidden>
+                        <div class="search-fields">
+                            <label class="field">
+                                <input type="text" name="pickup" list="place-suggestions" autocomplete="off" required
+                                    placeholder=" ">
+                                <span>Lugar de recogida</span>
+                            </label>
+                            <label class="field">
+                                <select name="duration" required>
+                                    <option value="" disabled selected>Selecciona</option>
+                                    <option value="1">1 hora</option>
+                                    <option value="2">2 horas</option>
+                                    <option value="3">3 horas</option>
+                                    <option value="4">4 horas</option>
+                                    <option value="5">5 horas</option>
+                                    <option value="6">6 horas</option>
+                                    <option value="7">7 horas</option>
+                                    <option value="8">8 horas</option>
+                                    <option value="9">9 horas</option>
+                                    <option value="10">10 horas</option>
+                                    <option value="11">11 horas</option>
+                                    <option value="12">12 horas</option>
+                                </select>
+                                <span>Duración</span>
+                            </label>
+                            <label class="field">
+                                <input type="date" name="date" required>
+                                <span>Fecha</span>
+                            </label>
+                            <label class="field">
+                                <input type="time" name="time" required>
+                                <span>Hora</span>
+                            </label>
+                            <label class="field">
+                                <input type="number" name="passengers" min="1" value="1" required>
+                                <span>Pasajeros</span>
+                            </label>
+                        </div>
+                        <p class="search-errors" id="errors-hourly" hidden></p>
+                        <button type="submit" class="search-submit">Buscar / Continuar</button>
+                    </form>
                 </div>
             </div>
         </div>
 
-        <svg class="swoosh-path" viewBox="0 0 1440 800" fill="none" xmlns="http://www.w3.org/2000/svg"
-            preserveAspectRatio="none">
-            <path class="swoosh-line"
-                d="M-50,700 C250,850 500,400 450,250 C400,100 -50,550 400,700 C800,800 1100,600 1500,0"
-                stroke="rgba(255,255,255,0.2)" stroke-width="15" stroke-linecap="round" stroke-linejoin="round" />
-        </svg>
     </section>
 
-    <!-- Services Section -->
-    <section id="services" class="services-section">
+    <!-- Experiences Catalog -->
+    <section id="experiences" class="services-section">
+        <span id="destinations" class="anchor-target" aria-hidden="true"></span>
         <div class="section-header fade-in-scroll">
-            <h2>Portafolio de Servicios</h2>
-            <p>Las mejores experiencias turísticas diseñadas especialmente para ti.</p>
+            <h2>Experiencias Explore Tours</h2>
+            <p>City tours, traslados, barcos e islas y destinos del Caribe colombiano.</p>
         </div>
 
-        <div class="services-grid">
-            <div class="service-card fade-in-scroll">
+        <div class="catalog-filters fade-in-scroll" role="group" aria-label="Filtrar experiencias">
+            <button type="button" class="filter-chip is-active" data-filter="todas" aria-pressed="true">Todas</button>
+            <button type="button" class="filter-chip" data-filter="city-tours" aria-pressed="false">City tours</button>
+            <button type="button" class="filter-chip" data-filter="traslados" aria-pressed="false">Traslados</button>
+            <button type="button" class="filter-chip" data-filter="barcos-islas" aria-pressed="false">Barcos e
+                islas</button>
+            <button type="button" class="filter-chip" data-filter="destinos-caribe" aria-pressed="false">Destinos
+                Caribe</button>
+        </div>
+
+        <div class="services-grid" id="catalog-grid">
+            <article class="service-card fade-in-scroll" data-experience-id="city-tour-cartagena"
+                data-category="city-tours">
                 <div class="card-image-wrapper">
-                    <img src="assets/cartagena.png" alt="City Tour Cartagena">
+                    <img src="assets/cartagena.png" alt="City Tour en Cartagena, ciudad amurallada">
                 </div>
                 <div class="card-content">
                     <h3>City Tour en la ciudad de Cartagena</h3>
                     <p>Recorre la imponente ciudad amurallada, descubre su magia colonial, sus históricos castillos y la
                         vibrante cultura caribeña que la hace única e inolvidable.</p>
-                    <a href="https://wa.me/573042143149?text=Hola,%20me%20interesa%20reservar%20el%20City%20Tour%20en%20Cartagena."
-                        target="_blank" class="card-btn">
+                    <a href="#" target="_blank" rel="noopener noreferrer" class="card-btn" data-wa-title="City Tour en la ciudad de Cartagena">
                         <i class="uil uil-whatsapp"></i> Reservar por WhatsApp
                     </a>
                 </div>
-            </div>
+            </article>
 
-            <div class="service-card fade-in-scroll">
+            <article class="service-card fade-in-scroll" data-experience-id="city-tour-barranquilla"
+                data-category="city-tours">
                 <div class="card-image-wrapper">
-                    <img src="assets/barranquilla.png" alt="City Tour Barranquilla">
+                    <img src="assets/barranquilla.png" alt="City Tour en Barranquilla">
                 </div>
                 <div class="card-content">
                     <h3>City Tour en la ciudad de Barranquilla</h3>
                     <p>Explora la majestuosa Puerta de Oro de Colombia, el Gran Malecón del Río, monumentos históricos y
                         la alegría inigualable de su gente alegre y amable.</p>
-                    <a href="https://wa.me/573042143149?text=Hola,%20me%20interesa%20reservar%20el%20City%20Tour%20en%20Barranquilla."
-                        target="_blank" class="card-btn">
+                    <a href="#" target="_blank" rel="noopener noreferrer" class="card-btn" data-wa-title="City Tour en la ciudad de Barranquilla">
                         <i class="uil uil-whatsapp"></i> Reservar por WhatsApp
                     </a>
                 </div>
-            </div>
+            </article>
 
-            <div class="service-card fade-in-scroll">
+            <article class="service-card fade-in-scroll" data-experience-id="city-tour-santa-marta"
+                data-category="city-tours">
                 <div class="card-image-wrapper">
-                    <img src="assets/santamarta.png" alt="City Tour Santa Marta">
+                    <img src="assets/santamarta.png" alt="City Tour en Santa Marta">
                 </div>
                 <div class="card-content">
                     <h3>City Tour en la ciudad de Santa Marta</h3>
                     <p>Conoce la Perla de América con su centro histórico de ensueño. Disfruta de bahías místicas y la
                         asombrosa Sierra Nevada en un solo ecosistema.</p>
-                    <a href="https://wa.me/573042143149?text=Hola,%20me%20interesa%20reservar%20el%20City%20Tour%20en%20Santa%20Marta."
-                        target="_blank" class="card-btn">
+                    <a href="#" target="_blank" rel="noopener noreferrer" class="card-btn" data-wa-title="City Tour en la ciudad de Santa Marta">
                         <i class="uil uil-whatsapp"></i> Reservar por WhatsApp
                     </a>
                 </div>
-            </div>
+            </article>
 
-            <div class="service-card fade-in-scroll">
+            <article class="service-card fade-in-scroll" data-experience-id="traslado-aeropuerto"
+                data-category="traslados">
                 <div class="card-image-wrapper">
-                    <img src="assets/airport.png" alt="Traslados Aeropuerto">
+                    <img src="assets/airport.png" alt="Traslado desde o hacia el aeropuerto">
                 </div>
                 <div class="card-content">
                     <h3>Traslados desde o hacia el aeropuerto</h3>
                     <p>Inicia o asegura el fin de tu viaje con confort total. Te brindamos transporte seguro en
                         vehículos de vanguardia, para que viajes y descanses sin preocupaciones.</p>
-                    <a href="https://wa.me/573042143149?text=Hola,%20necesito%20coordinar%20un%20traslado%20desde/hacia%20el%20aeropuerto."
-                        target="_blank" class="card-btn">
+                    <a href="#" target="_blank" rel="noopener noreferrer" class="card-btn" data-wa-title="Traslados desde o hacia el aeropuerto">
                         <i class="uil uil-whatsapp"></i> Reservar por WhatsApp
                     </a>
                 </div>
-            </div>
+            </article>
 
-            <div class="service-card wide-card fade-in-scroll">
+            <article class="service-card fade-in-scroll" data-experience-id="transporte-especializado"
+                data-category="traslados">
+                <div class="card-image-wrapper card-media-brand" role="img"
+                    aria-label="Transporte especializado entre ciudades del Caribe">
+                    <i class="uil uil-car-sideview" aria-hidden="true"></i>
+                    <span>Transporte especializado</span>
+                </div>
+                <div class="card-content">
+                    <h3>Transporte especializado</h3>
+                    <p>Todas las ciudades conectadas mediante traslados cómodos, seguros y con el mejor equipo.</p>
+                    <a href="#" target="_blank" rel="noopener noreferrer" class="card-btn" data-wa-title="Transporte especializado">
+                        <i class="uil uil-whatsapp"></i> Reservar por WhatsApp
+                    </a>
+                </div>
+            </article>
+
+            <article class="service-card fade-in-scroll" data-experience-id="barcos-islas"
+                data-category="barcos-islas">
                 <div class="card-image-wrapper">
-                    <img src="assets/boat.png" alt="Alquiler de Barcos Turísticos y Paseo por las Islas">
+                    <img src="assets/boat.png" alt="Alquiler de barcos turísticos y paseo por islas">
                 </div>
                 <div class="card-content">
                     <h3>Alquiler de barcos turísticos y paseo por islas</h3>
                     <p>Renta un pedazo del paraíso caribeño. Navega sobre aguas cristalinas y descubre hermosas islas
                         vecinas con todo el lujo, confort e intimidad de nuestros yates deportivos de lujo.</p>
-                    <a href="https://wa.me/573042143149?text=Hola,%20quisiera%20saber%20sobre%20el%20alquiler%20de%20barcos%20y%20paseo%20por%20las%20islas%20en%20Cartagena."
-                        target="_blank" class="card-btn">
+                    <a href="#" target="_blank" rel="noopener noreferrer" class="card-btn" data-wa-title="Alquiler de barcos turísticos y paseo por islas">
                         <i class="uil uil-whatsapp"></i> Reservar por WhatsApp
                     </a>
                 </div>
-            </div>
-        </div>
-    </section>
+            </article>
 
-    <!-- Destinos Nacionales Section -->
-    <section id="destinations" class="destinations-section">
-        <div class="section-header fade-in-scroll">
-            <h2>Destinos Nacionales</h2>
-            <p>Conoce los mágicos rincones de la región Caribe a los que te llevamos.</p>
-        </div>
-        
-        <div class="destinations-grid">
-            <div class="destination-item fade-in-scroll">
-                <i class="uil uil-diamond"></i>
-                <h3>Compra de Esmeraldas</h3>
-                <p>Lugares genuinos y de total confianza para adquirir la emblemática esmeralda colombiana.</p>
-            </div>
-            
-            <div class="destination-item fade-in-scroll">
-                <i class="uil uil-sun"></i>
-                <h3>Playa Blanca y Barú</h3>
-                <p>Naturaleza pura, arena blanca y aguas turquesas del Caribe colombiano.</p>
-            </div>
-            
-            <div class="destination-item fade-in-scroll">
-                <i class="uil uil-mountains"></i>
-                <h3>Volcán del Totumo</h3>
-                <p>Una relajante e icónica experiencia de lodo medicinal en un entorno natural único.</p>
-            </div>
-            
-            <div class="destination-item fade-in-scroll">
-                <i class="uil uil-map-marker"></i>
-                <h3>Cartagena y Santa Marta</h3>
-                <p>Patrimonio histórico, murallas coloniales, la Quinta de San Pedro Alejandrino y la Sierra Nevada.</p>
-            </div>
-            
-            <div class="destination-item fade-in-scroll">
-                <i class="uil uil-map-pin-alt"></i>
-                <h3>Sincelejo y Montería</h3>
-                <p>Tradición sabanera y ganadera de Colombia, con hermosos recorridos por sus llanuras.</p>
-            </div>
-            
-            <div class="destination-item fade-in-scroll">
-                <i class="uil uil-car-sideview"></i>
-                <h3>Transporte Especializado</h3>
-                <p>Todas las ciudades conectadas mediante traslados cómodos, seguros y con el mejor equipo.</p>
-            </div>
+            <article class="service-card fade-in-scroll" data-experience-id="compra-esmeraldas"
+                data-category="destinos-caribe">
+                <div class="card-image-wrapper card-media-brand card-media-emerald" role="img"
+                    aria-label="Compra de esmeraldas colombianas">
+                    <i class="uil uil-diamond" aria-hidden="true"></i>
+                    <span>Esmeraldas</span>
+                </div>
+                <div class="card-content">
+                    <h3>Compra de esmeraldas</h3>
+                    <p>Lugares genuinos y de total confianza para adquirir la emblemática esmeralda colombiana.</p>
+                    <a href="#" target="_blank" rel="noopener noreferrer" class="card-btn" data-wa-title="Compra de esmeraldas">
+                        <i class="uil uil-whatsapp"></i> Reservar por WhatsApp
+                    </a>
+                </div>
+            </article>
+
+            <article class="service-card fade-in-scroll" data-experience-id="playa-blanca-baru"
+                data-category="destinos-caribe">
+                <div class="card-image-wrapper card-media-brand card-media-beach" role="img"
+                    aria-label="Playa Blanca y Barú en el Caribe colombiano">
+                    <i class="uil uil-sun" aria-hidden="true"></i>
+                    <span>Playa Blanca y Barú</span>
+                </div>
+                <div class="card-content">
+                    <h3>Playa Blanca y Barú</h3>
+                    <p>Naturaleza pura, arena blanca y aguas turquesas del Caribe colombiano.</p>
+                    <a href="#" target="_blank" rel="noopener noreferrer" class="card-btn" data-wa-title="Playa Blanca y Barú">
+                        <i class="uil uil-whatsapp"></i> Reservar por WhatsApp
+                    </a>
+                </div>
+            </article>
+
+            <article class="service-card fade-in-scroll" data-experience-id="volcan-totumo"
+                data-category="destinos-caribe">
+                <div class="card-image-wrapper card-media-brand card-media-volcano" role="img"
+                    aria-label="Volcán del Totumo">
+                    <i class="uil uil-mountains" aria-hidden="true"></i>
+                    <span>Volcán del Totumo</span>
+                </div>
+                <div class="card-content">
+                    <h3>Volcán del Totumo</h3>
+                    <p>Una relajante e icónica experiencia de lodo medicinal en un entorno natural único.</p>
+                    <a href="#" target="_blank" rel="noopener noreferrer" class="card-btn" data-wa-title="Volcán del Totumo">
+                        <i class="uil uil-whatsapp"></i> Reservar por WhatsApp
+                    </a>
+                </div>
+            </article>
+
+            <article class="service-card fade-in-scroll" data-experience-id="cartagena-santa-marta"
+                data-category="destinos-caribe">
+                <div class="card-image-wrapper">
+                    <img src="assets/cartagena.png" alt="Recorrido Cartagena y Santa Marta">
+                </div>
+                <div class="card-content">
+                    <h3>Cartagena y Santa Marta</h3>
+                    <p>Patrimonio histórico, murallas coloniales, la Quinta de San Pedro Alejandrino y la Sierra Nevada.</p>
+                    <a href="#" target="_blank" rel="noopener noreferrer" class="card-btn" data-wa-title="Cartagena y Santa Marta">
+                        <i class="uil uil-whatsapp"></i> Reservar por WhatsApp
+                    </a>
+                </div>
+            </article>
+
+            <article class="service-card fade-in-scroll" data-experience-id="sincelejo-monteria"
+                data-category="destinos-caribe">
+                <div class="card-image-wrapper card-media-brand card-media-sabana" role="img"
+                    aria-label="Sincelejo y Montería">
+                    <i class="uil uil-map-pin-alt" aria-hidden="true"></i>
+                    <span>Sincelejo y Montería</span>
+                </div>
+                <div class="card-content">
+                    <h3>Sincelejo y Montería</h3>
+                    <p>Tradición sabanera y ganadera de Colombia, con hermosos recorridos por sus llanuras.</p>
+                    <a href="#" target="_blank" rel="noopener noreferrer" class="card-btn" data-wa-title="Sincelejo y Montería">
+                        <i class="uil uil-whatsapp"></i> Reservar por WhatsApp
+                    </a>
+                </div>
+            </article>
         </div>
     </section>
 
@@ -290,12 +466,64 @@
         </div>
     </section>
 
+    <!-- FAQ -->
+    <section id="faq" class="faq-section">
+        <div class="section-header fade-in-scroll">
+            <h2>Preguntas frecuentes</h2>
+            <p>Resuelve tus dudas antes de cotizar. Si necesitas algo más, estamos en WhatsApp.</p>
+        </div>
+        <div class="faq-list fade-in-scroll">
+            <details>
+                <summary>¿Puedo cancelar o cambiar mi reserva?</summary>
+                <div class="faq-answer">
+                    <p>Las condiciones de cancelación o cambio se confirman al cotizar, según la fecha y el tipo de
+                        servicio. Escríbenos por WhatsApp con los datos de tu viaje y te indicamos la política aplicable.</p>
+                </div>
+            </details>
+            <details>
+                <summary>¿En qué horarios puedo pedir un traslado o un tour?</summary>
+                <div class="faq-answer">
+                    <p>Coordinamos según tu itinerario o el horario de tu vuelo. Consulta disponibilidad por WhatsApp.
+                        En este sitio no publicamos un servicio 24 horas.</p>
+                </div>
+            </details>
+            <details>
+                <summary>¿Cómo se pagan los servicios?</summary>
+                <div class="faq-answer">
+                    <p>Explore Tours no cobra en esta página. Los medios de pago se acuerdan al cotizar por WhatsApp,
+                        antes de confirmar la reserva.</p>
+                </div>
+            </details>
+            <details>
+                <summary>¿Qué incluye cada experiencia?</summary>
+                <div class="faq-answer">
+                    <p>Cada card del catálogo resume la experiencia. El detalle del recorrido, tiempos y condiciones se
+                        confirma en la cotización por WhatsApp.</p>
+                </div>
+            </details>
+            <details>
+                <summary>¿Cómo reservo?</summary>
+                <div class="faq-answer">
+                    <p>Elige una experiencia y pulsa reservar, o completa el buscador del inicio (transporte o por horas)
+                        y continúa por WhatsApp. Un asesor te responde para confirmar.</p>
+                </div>
+            </details>
+            <details>
+                <summary>¿Cómo los contacto?</summary>
+                <div class="faq-answer">
+                    <p>WhatsApp +57 304 214 3149 o Instagram @exploretraveltoursco. El botón verde de la página abre el
+                        chat.</p>
+                </div>
+            </details>
+        </div>
+    </section>
+
     <!-- Footer -->
     <footer class="main-footer">
         <div class="footer-content">
             <p>&copy; 2026 Explore Travel Tours. Todos los derechos reservados. Propiedad intelectual registrada.</p>
-            <a href="https://www.instagram.com/exploretraveltoursco" target="_blank" class="footer-ig-link"><i
-                    class="uil uil-instagram"></i> Síguenos en Instagram</a>
+            <a href="https://www.instagram.com/exploretraveltoursco" target="_blank" rel="noopener noreferrer"
+                class="footer-ig-link"><i class="uil uil-instagram"></i> Síguenos en Instagram</a>
         </div>
     </footer>
 
